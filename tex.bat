@@ -4,7 +4,7 @@ IF EXIST document/filename (
 ) ELSE (
 	SET /p pdfname=Pdf name [document]: || SET pdfname=document
 )
-IF %pdfname:~-4% NEQ ".pdf" (
+IF %pdfname:~-4% NEQ .pdf (
 	SET pdfname=%pdfname%.pdf
 )
 ECHO %pdfname%>document/filename
