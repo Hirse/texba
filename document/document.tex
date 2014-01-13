@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper]{scrreprt}
 
+\newif\ifsperr
 \newcommand{\Imgpath}{../img/}
 \newcommand{\Codepath}{../code/}
 \input{../settings.tex}
@@ -149,39 +150,41 @@
 	\end{table}
 	\renewcommand{\arraystretch}{1}
 	
-	\newpage
-	\hypertarget{nda}{}
-	\bookmark[level=chapter, dest=nda]{Sperrvermerk}
-	\chapter*{Sperrvermerk}
-		\thispagestyle{plain}
-		Die nachfolgende Arbeit enthält vertrauliche Daten, welche geistiges Eigentum der\\
-		\linebreak
-		SAP AG \\
-		Dietmar-Hopp-Allee 16 \\
-		69190 Walldorf \\
-		\linebreak
-		darstellen.
-		\linebreak
-		\linebreak
-		Sie darf als Leistungsnachweis des Studiengangs „Wirtschaftsinformatik“ an der Dualen Hochschule Baden-Württemberg in Mannheim nur zu Prüfungszwecken zu\-gäng\-lich gemacht werden. Über den Inhalt ist Stillschweigen zu bewahren. Ver\-öf\-fent\-li\-chung oder Vervielfältigung der \Arbeitstyp – auch auszugsweise – ist ohne ausdrückliche Genehmigung der SAP AG nicht gestattet. Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in dieser Arbeit berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher benutzt werden dürfen.\\
-		\linebreak
-		\linebreak
-		\linebreak
-		\begin{minipage}[t]{0.5\textwidth}
-			\begin{tabular}{@{}l@{\hspace{60px}}}
-				\hline
-				Ort, Datum
-			\end{tabular}
-		\end{minipage}
-		\hfill
-		\begin{minipage}[t]{0.5\textwidth}
-			\begin{flushright}
+	\ifsperr
+		\newpage
+		\hypertarget{nda}{}
+		\bookmark[level=chapter, dest=nda]{Sperrvermerk}
+		\chapter*{Sperrvermerk}
+			\thispagestyle{plain}
+			Die nachfolgende Arbeit enthält vertrauliche Daten, welche geistiges Eigentum der\\
+			\linebreak
+			SAP AG \\
+			Dietmar-Hopp-Allee 16 \\
+			69190 Walldorf \\
+			\linebreak
+			darstellen.
+			\linebreak
+			\linebreak
+			Sie darf als Leistungsnachweis des Studiengangs „Wirtschaftsinformatik“ an der Dualen Hochschule Baden-Württemberg in Mannheim nur zu Prüfungszwecken zu\-gäng\-lich gemacht werden. Über den Inhalt ist Stillschweigen zu bewahren. Ver\-öf\-fent\-li\-chung oder Vervielfältigung der \Arbeitstyp – auch auszugsweise – ist ohne ausdrückliche Genehmigung der SAP AG nicht gestattet. Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in dieser Arbeit berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher benutzt werden dürfen.\\
+			\linebreak
+			\linebreak
+			\linebreak
+			\begin{minipage}[t]{0.5\textwidth}
 				\begin{tabular}{@{}l@{\hspace{60px}}}
 					\hline
-					Unterschrift
+					Ort, Datum
 				\end{tabular}
-			\end{flushright}
-		\end{minipage}
+			\end{minipage}
+			\hfill
+			\begin{minipage}[t]{0.5\textwidth}
+				\begin{flushright}
+					\begin{tabular}{@{}l@{\hspace{60px}}}
+						\hline
+						Unterschrift
+					\end{tabular}
+				\end{flushright}
+			\end{minipage}
+	\fi
 	
 
 	\newpage
