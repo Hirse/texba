@@ -1,0 +1,27 @@
+% Einstellung von Variablen für das gesamte Dokument
+\newcommand{\Ersteller}{__INPUT__}
+\newcommand{\Kurs}{__INPUT__}
+\newcommand{\Titel}{__INPUT__}
+\newcommand{\Arbeitstyp}{__INPUT__} % z.B. Bachelorarbeit
+
+% Formulierung der Tabelle auf dem Titelblatt
+\newcommand{\Titelblatt}{
+	\textbf{Verfasser:} & \Ersteller\\
+	\textbf{Matrikelnummer:} & __INPUT__\\
+	\textbf{Firma:} & __INPUT__\\
+	\textbf{Abteilung:} & __INPUT__\\
+	\textbf{Kurs:} & \Kurs\\
+	\textbf{Studiengangsleiter:} & __INPUT__\\
+	\textbf{Wissenschaftlicher Betreuer:} & __INPUT__ \flq{}\href{mailto:__INPUT[E-Mail]__}{__INPUT[E-Mail]__}\frq{}\\
+	\textbf{Firmenbetreuer:} & __INPUT__ \flq{}\href{mailto:__INPUT[E-Mail]__}{__INPUT[E-Mail]__}\frq{}\\
+	\textbf{Bearbeitungszeitraum:} & __INPUT[Datum]__ bis __INPUT[Datum]__\\
+}
+
+% Anpassung der Pfade zu Bildern und Code
+%\renewcommand{\Imgpath}{../img/}
+%\renewcommand{\Codepath}{../code/}
+
+% Mit hyphenation können die Regeln für die Silbentrennung überschrieben werden
+% Der Input ist dazu eine mit Leerzeichen getrennte Liste
+% (Das funktioniert aber nicht für Wörter mit Umlauten)
+%\hyphenation{__INPUT__}
