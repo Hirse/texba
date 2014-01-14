@@ -10,6 +10,9 @@ IF %pdfname:~-4% NEQ .pdf (
 ECHO %pdfname%>document/filename
 
 CD document
-texify --pdf document.tex
+pdflatex -quiet document
+biber -q document
+pdflatex -quiet document
+pdflatex -quiet document
 MOVE /y document.pdf ../"%pdfname%"
 CD ..

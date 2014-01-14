@@ -20,10 +20,10 @@
 	\definecolor{commentblue}{HTML}{3F5FBF}
 	\definecolor{numberblue}{HTML}{33A1DE}
 \usepackage{mathpazo} %Schriftart
-\usepackage{url}
-\usepackage[longnamesfirst, round]{natbib}
-%\usepackage[style=authortitle]{biblatex}
-%	\addbibresource{Quellen.bib}
+\usepackage[hyphens]{url}
+\usepackage[style=authortitle,backend=biber]{biblatex}
+	\addbibresource{../bib/Quellen.bib}
+	\nocite{*}
 \usepackage{setspace}
 	\linespread{1.5} %Füllenderes Inhaltsverzeichnis
 \usepackage{enumitem,lipsum}
@@ -79,6 +79,7 @@
 		morestring=[b][\color{stringblue}]",
 	}
 	\renewcommand\lstlistlistingname{Listingverzeichnis}
+\usepackage[figure,table,lstlisting]{totalcount}
 \usepackage{hyperref}
 	\hypersetup{
 		hidelinks,
@@ -87,8 +88,7 @@
 	}
 	\def\sectionautorefname{Abschnitt}
 	\def\chapterautorefname{Kapitel}
-	\providecommand*{\lstinputlistingautorefname}{Listing}
-	\providecommand*{\lstlistingautorefname}{Listing}
+	\providecommand*{\lstnumberautorefname}{Listing}
 \usepackage{bookmark}
 \usepackage{chngcntr}
 	\counterwithout{footnote}{chapter} %Durchgehende Nummerierung der Fußnoten
@@ -206,22 +206,24 @@
 		\bookmark[level=chapter, dest=toc]{Inhaltsverzeichnes}
 	\tableofcontents
 		
-	\listoffigures
+	\iftotalfigures
+		\listoffigures
 		\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+	\fi
 	
-	\lstlistoflistings
+	\iftotallstlistings
+		\lstlistoflistings
 		\addcontentsline{toc}{chapter}{Listingverzeichnis}
+	\fi
 		
-	\listoftables
+	\iftotaltables
+		\listoftables
 		\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+	\fi
 
 	\input{../text/text.tex}
 
-	\nocite{*}
-	\bibliography{..bib/Quellen}
-		\bibliographystyle{plainnat}
-		\addcontentsline{toc}{chapter}{Literaturverzeichnis}
-	%\printbibliography
+	\printbibliography[heading=bibintoc]{}
 		
 
 	\newpage
