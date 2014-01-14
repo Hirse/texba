@@ -10,7 +10,11 @@ IF %pdfname:~-4% NEQ .pdf (
 ECHO %pdfname%>document/filename
 
 CD document
+ECHO Generating %pdfname% ...
 pdflatex -quiet document
+IF EXIST document.glo (
+	makeindex -q -s document.ist -t document.glg -o document.gls document.glo
+)
 biber -q document
 pdflatex -quiet document
 pdflatex -quiet document

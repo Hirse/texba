@@ -1,6 +1,8 @@
 \documentclass[12pt,a4paper]{scrreprt}
 
 \newif\ifsperr
+\newif\ifglossary
+\newcommand{\Glossarypath}{../text/glossary.tex}
 \newcommand{\Imgpath}{../img/}
 \newcommand{\Codepath}{../code/}
 \input{../settings.tex}
@@ -115,6 +117,13 @@
 		\renewcommand{\headrulewidth}{0pt}
 		\renewcommand{\footrulewidth}{0.4pt}
 	}
+\ifglossary
+	\usepackage[toc, nonumberlist, translate=babel]{glossaries}
+		%###
+		\input{\Glossarypath}
+		%###
+		\makeglossaries
+\fi
 
 
 \begin{document}
@@ -224,10 +233,13 @@
 	\fi
 
 	\input{../text/text.tex}
+	
+	\ifglossary
+		\printglossaries
+	\fi
 
 	\printbibliography[heading=bibintoc]{}
 		
-
 	\newpage
 	\hypertarget{decl}{}
 	\bookmark[level=chapter, dest=decl]{Ehrenwörtliche Erklärung}
