@@ -2,6 +2,7 @@
 
 \newif\ifsperr
 \newif\ifglossary
+\newif\ifroman
 \newcommand{\Glossarypath}{../text/glossary.tex}
 \newcommand{\Imgpath}{../img/}
 \newcommand{\Codepath}{../code/}
@@ -128,6 +129,9 @@
 
 
 \begin{document}
+	\ifroman
+		\pagenumbering{Roman}
+	\fi
 	\hypertarget{top}{}
 	\bookmark[dest=top]{\Titel}
 	\thispagestyle{empty}
@@ -154,7 +158,7 @@
 			\textcolor{red}{\textbf{-Sperrvermerk-}}\\
 		\fi
 	\end{center}
-	\renewcommand{\arraystretch}{1.5}
+	\renewcommand{\arraystretch}{1.4}
 	\begin{table}[!b]
 		\begin{tabular}{ll}
 			\Titelblatt{}
@@ -233,8 +237,19 @@
 		\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 	\fi
 
+	\ifroman
+		\newpage
+		\newcounter{lastroman}
+		\setcounter{lastroman}{\value{page}}
+		\pagenumbering{arabic}
+	\fi
 	\input{../text/text.tex}
 	
+	\ifroman
+		\newpage
+		\pagenumbering{Roman}
+		\setcounter{page}{\value{lastroman}}
+	\fi
 	\ifglossary
 		\printglossaries
 	\fi
