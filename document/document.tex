@@ -1,19 +1,19 @@
-\documentclass[12pt,a4paper]{scrreprt}
+\documentclass[fontsize=12pt,listof=totoc]{scrreprt}
 
 \newif\ifsperr
 \newif\ifglossary
 \newif\ifroman
-\newcommand{\Glossarypath}{../text/glossary.tex}
+\newcommand{\Abstractpath}{../text/abstract.tex}
+\newcommand{\Textpath}{../text/text.tex}
 \newcommand{\Imgpath}{../img/}
 \newcommand{\Codepath}{../code/}
+\newcommand{\Glossarypath}{../text/glossary.tex}
 \input{../settings.tex}
 
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{eurosym}
-% \usepackage[left=15mm,right=40mm]{geometry}
 \usepackage{graphicx}
-	\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \usepackage{xcolor}
 	\definecolor{gray}{rgb}{0.5,0.5,0.5}
 	\definecolor{stringblue}{HTML}{2A00FF}
@@ -22,17 +22,14 @@
 	\definecolor{jskeypink}{HTML}{7F0055}
 	\definecolor{commentblue}{HTML}{3F5FBF}
 	\definecolor{numberblue}{HTML}{33A1DE}
-\usepackage{mathpazo} %Schriftart
+% \usepackage{mathpazo} %Schriftart
 \usepackage[hyphens]{url}
+\usepackage[strict]{csquotes}
 \usepackage[style=authortitle,backend=biber]{biblatex}
 	\addbibresource{../bib/Quellen.bib}
 	\nocite{*}
 \usepackage{setspace}
-	\linespread{1.5} %Füllenderes Inhaltsverzeichnis
-\usepackage{enumitem,lipsum}
-%\usepackage{mdwlist}
-\usepackage{eqlist}
-\usepackage{scrhack}
+	\linespread{1.5}
 \usepackage{listings}
 	\renewcommand{\ttdefault}{pcr}
 	\lstset{
@@ -96,34 +93,19 @@
 \usepackage{bookmark}
 \usepackage{chngcntr}
 	\counterwithout{footnote}{chapter} %Durchgehende Nummerierung der Fußnoten
-\usepackage{fancyhdr}
-	\pagestyle{fancy}
-		\lhead{\nouppercase \leftmark}
-		\chead{}
-		\chead{}
-		\rhead{}
-		\lfoot{DHBW Mannheim}
-		\cfoot{- \thepage{} -}
-		\rfoot{\Ersteller}
-		\renewcommand{\headrulewidth}{0.4pt}
-		\renewcommand{\footrulewidth}{0.4pt}
- 		\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-	\fancypagestyle{plain}{
-		\lhead{}
-		\chead{}
-		\chead{}
-		\rhead{}
-		\lfoot{DHBW Mannheim}
-		\cfoot{- \thepage{} -}
-		\rfoot{\Ersteller}
-		\renewcommand{\headrulewidth}{0pt}
-		\renewcommand{\footrulewidth}{0.4pt}
-	}
+\usepackage[headsepline,footsepline,plainfootsepline,automark]{scrpage2}
+	\clearscrheadfoot
+	\ihead[]{\headmark}
+	\ifoot[DHBW Mannheim]{DHBW Mannheim}
+	\cfoot[- \pagemark{} -]{- \pagemark{} -}
+	\ofoot[\Ersteller]{\Ersteller}
+	\setkomafont{pagehead}{\normalfont}
+	\setkomafont{pagefoot}{\normalfont}
+	\pagestyle{scrheadings}
+\usepackage{scrhack}
 \ifglossary
-	\usepackage[toc, nonumberlist, translate=babel]{glossaries}
-		%###
+	\usepackage[toc,nonumberlist,translate=babel,acronym]{glossaries}
 		\input{\Glossarypath}
-		%###
 		\makeglossaries
 \fi
 
@@ -134,107 +116,79 @@
 	\fi
 	\hypertarget{top}{}
 	\bookmark[dest=top]{\Titel}
-	\thispagestyle{empty}
-	\begin{figure}[htbp]
-		\begin{minipage}[!t]{4cm}
-			\includegraphics[height=2.5cm, natwidth=300, natheight=148]{img/SAPlogo.png}
-		\end{minipage}
+	\begin{titlepage}
+		\includegraphics[height=70px]{img/firma}
 		\hfill
-		\begin{minipage}[!t]{5cm}
-			\includegraphics [height=2.5cm, natwidth=553, natheight=282] {img/dhbw.png}
-		\end{minipage}
-	\end{figure}
-	\begin{center}
-		\large{Duale Hochschule Baden-Württemberg}\\
-		\large{Mannheim}\\
-		\Large{\Arbeitstyp}\\
-		\vspace{20px}
-		\textbf{\Large{\Titel}}\\
-		\vspace{20px}
-		\normalsize
-		\textbf{Studiengang Wirtschaftsinformatik}\\
-		\textbf{\small{Profil Softwareengineering}}\\
-		\ifsperr
-			\textcolor{red}{\textbf{-Sperrvermerk-}}\\
-		\fi
-	\end{center}
-	\renewcommand{\arraystretch}{1.4}
-	\begin{table}[!b]
+		\includegraphics[height=70px]{img/dhbw}
+		\begin{center}
+			\large{Duale Hochschule Baden-Württemberg\\
+			Mannheim}\\
+			\usekomafont{subject}\Arbeitstyp\\
+			\vspace{20px}
+			\begin{onehalfspace}
+				{\LARGE\sffamily\Titel\\}
+			\end{onehalfspace}
+			\vspace{30px}
+			\normalsize
+			\textbf{Studiengang Wirtschaftsinformatik}\\
+			\textbf{\small{Profil Softwareengineering}}\\
+			\ifsperr
+				\textcolor{red}{\textbf{-Sperrvermerk-}}\\
+			\fi
+			\vfill
+		\end{center}
 		\begin{tabular}{ll}
 			\Titelblatt{}
 		\end{tabular}
-	\end{table}
-	\renewcommand{\arraystretch}{1}
+	\end{titlepage}
 	
 	\ifsperr
 		\newpage
 		\hypertarget{nda}{}
 		\bookmark[level=chapter, dest=nda]{Sperrvermerk}
+		\thispagestyle{scrplain}
 		\chapter*{Sperrvermerk}
-			\thispagestyle{plain}
-			Die nachfolgende Arbeit enthält vertrauliche Daten, welche geistiges Eigentum der\\
-			\linebreak
+			Die nachfolgende Arbeit enthält vertrauliche Daten, welche geistiges Eigentum der\\[\baselineskip]
 			SAP AG \\
 			Dietmar-Hopp-Allee 16 \\
 			69190 Walldorf \\
 			\linebreak
-			darstellen.
-			\linebreak
-			\linebreak
-			Sie darf als Leistungsnachweis des Studiengangs „Wirtschaftsinformatik“ an der Dualen Hochschule Baden-Württemberg in Mannheim nur zu Prüfungszwecken zu\-gäng\-lich gemacht werden. Über den Inhalt ist Stillschweigen zu bewahren. Ver\-öf\-fent\-li\-chung oder Vervielfältigung der \Arbeitstyp – auch auszugsweise – ist ohne ausdrückliche Genehmigung der SAP AG nicht gestattet. Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in dieser Arbeit berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher benutzt werden dürfen.\\
-			\linebreak
-			\linebreak
-			\linebreak
-			\begin{minipage}[t]{0.5\textwidth}
-				\begin{tabular}{@{}l@{\hspace{60px}}}
-					\hline
-					Ort, Datum
-				\end{tabular}
-			\end{minipage}
-			\hfill
-			\begin{minipage}[t]{0.5\textwidth}
-				\begin{flushright}
-					\begin{tabular}{@{}l@{\hspace{60px}}}
-						\hline
-						Unterschrift
-					\end{tabular}
-				\end{flushright}
-			\end{minipage}
+			darstellen.\\[\baselineskip]
+			Sie darf als Leistungsnachweis des Studiengangs „Wirtschaftsinformatik“ an der Dualen Hochschule Baden-Württemberg in Mannheim nur zu Prüfungszwecken zu\-gäng\-lich gemacht werden. Über den Inhalt ist Stillschweigen zu bewahren. Ver\-öf\-fent\-li\-chung oder Vervielfältigung der \Arbeitstyp{} – auch auszugsweise – ist ohne aus\-drück\-liche Genehmigung der SAP~AG nicht gestattet. Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in dieser Arbeit berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher benutzt werden dürfen.\\
+			\vfill
+			\noindent
+			\rule[-7px]{120px}{.4pt}\hfill\rule[-7px]{120px}{.4pt}\\
+			Ort, Datum\hfill\makebox[120px][l]{Unterschrift}
 	\fi
 	
-
 	\newpage
-		\hypertarget{abstract}{}
-		\bookmark[level=chapter, dest=abstract]{Kurzfassung}
+	\hypertarget{abstract}{}
+	\bookmark[level=chapter, dest=abstract]{Kurzfassung}
+	\thispagestyle{scrplain}
 	\chapter*{Kurzfassung}
-		\thispagestyle{plain}
-		\begin{eqlist*}[\def\makelabel#1{#1:}\labelsep1em]
-			\item[Verfasser] \Ersteller
-			\item[Kurs] \Kurs
-			\item[Thema] \Titel
-		\end{eqlist*}
-		
-		\input{../text/abstract.tex}
+		\begin{tabular}{lp{0.8\columnwidth}}
+			Verfasser: & \Ersteller \\
+			Kurs: & \Kurs \\
+			Thema: & \Titel \\
+		\end{tabular}
+		\\[\baselineskip]
+		\input{\Abstractpath}
 
-		
 	\newpage
 		\hypertarget{toc}{}
-		\bookmark[level=chapter, dest=toc]{Inhaltsverzeichnes}
+		\bookmark[level=chapter, dest=toc]{\contentsname}
 	\tableofcontents
 		
 	\iftotalfigures
 		\listoffigures
-		\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 	\fi
 	
 	\iftotallstlistings
 		\lstlistoflistings
-		\addcontentsline{toc}{chapter}{Listingverzeichnis}
 	\fi
 		
 	\iftotaltables
 		\listoftables
-		\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
 	\fi
 
 	\ifroman
@@ -243,7 +197,7 @@
 		\setcounter{lastroman}{\value{page}}
 		\pagenumbering{arabic}
 	\fi
-	\input{../text/text.tex}
+	\input{\Textpath}
 	
 	\ifroman
 		\newpage
@@ -262,32 +216,19 @@
 	\chapter*{Ehrenwörtliche Erklärung}
 		\thispagestyle{empty}
 		Ich erkläre hiermit ehrenwörtlich:
-		\begin{enumerate}[label=\arabic*),align=left] 
-			\item dass ich meine \Arbeitstyp mit dem Thema \\
+		\renewcommand{\theenumi}{\arabic{enumi})}
+		\renewcommand\labelenumi{\theenumi}
+		\begin{enumerate}
+			\item dass ich meine \Arbeitstyp{} mit dem Thema \\
 				\textbf{\Titel} \\
 				ohne fremde Hilfe angefertigt habe; 
-			\item dass ich die Übernahme wörtlicher Zitate aus der Literatur sowie die Verwendung der Gedanken anderer Autoren an den entsprechenden Stellen innerhalb der \Arbeitstyp gekennzeichnet habe;
-			\item dass ich meine \Arbeitstyp bei keiner anderen Prüfung vorgelegt habe;
+			\item dass ich die Übernahme wörtlicher Zitate aus der Literatur sowie die Verwendung der Gedanken anderer Autoren an den entsprechenden Stellen innerhalb der \Arbeitstyp{} gekennzeichnet habe;
+			\item dass ich meine \Arbeitstyp{} bei keiner anderen Prüfung vorgelegt habe;
 			\item dass die eingereichte elektronische Fassung exakt mit der eingereichten schriftlichen Fassung übereinstimmt.\\
 		\end{enumerate} 
 		Ich bin mir bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird.
-		\linebreak
-		\linebreak
-		\linebreak
-		\linebreak
-		\begin{minipage}[t]{0.5\textwidth}
-			\begin{tabular}{@{}l@{\hspace{60px}}}
-				\hline
-				Ort, Datum
-			\end{tabular}
-		\end{minipage}
-		\hfill
-		\begin{minipage}[t]{0.5\textwidth}
-			\begin{flushright}
-				\begin{tabular}{@{}l@{\hspace{60px}}}
-					\hline
-					Unterschrift
-				\end{tabular}
-			\end{flushright}
-		\end{minipage}
+		\vfill
+		\noindent
+		\rule[-7px]{120px}{.4pt}\hfill\rule[-7px]{120px}{.4pt}\\
+		Ort, Datum\hfill\makebox[120px][l]{Unterschrift}
 \end{document}
