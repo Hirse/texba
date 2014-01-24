@@ -8,6 +8,7 @@
 \newcommand{\Imgpath}{../img/}
 \newcommand{\Codepath}{../code/}
 \newcommand{\Glossarypath}{../text/glossary.tex}
+\newcommand{\Bibstyle}{style=authortitle}
 \input{../settings.tex}
 
 \usepackage[T1]{fontenc}
@@ -26,7 +27,7 @@
 	\definecolor{numberblue}{HTML}{33A1DE}
 \usepackage[hyphens]{url}
 \usepackage[strict]{csquotes}
-\usepackage[style=authortitle,backend=biber]{biblatex}
+\usepackage[backend=biber,\Bibstyle]{biblatex}
 	\addbibresource{../bib/Quellen.bib}
 	\nocite{*}
 \usepackage{setspace}
