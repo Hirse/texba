@@ -32,6 +32,8 @@
 	\nocite{*}
 \usepackage{setspace}
 	\linespread{1.5}
+\usepackage{accsupp}
+	\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
 \usepackage{listings}
 	\renewcommand{\ttdefault}{pcr}
 	\lstset{
@@ -44,7 +46,7 @@
 		keywordstyle=[5]\color{black},
 		frame=single,
 		numbers=left,
-		numberstyle=\scriptsize\color{gray},
+		numberstyle=\scriptsize\color{gray}\emptyaccsupp,
 		stepnumber=1,
 		tabsize=4,
 		lineskip=1pt,
