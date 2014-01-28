@@ -34,9 +34,9 @@ IF EXIST document.acn (
 )
 ECHO Creating Bibliography ...
 %texpath%biber -q document
-%texpath%pdflatex -quiet document
-%texpath%pdflatex -quiet document
 ECHO Creating pdf Document ...
+%texpath%pdflatex -quiet document
+%texpath%pdflatex -quiet document
 %texpath%pdflatex -quiet document
 MOVE /y document.pdf ../"%pdfname%" > NUL
 MOVE /y document.log ../texba.log > NUL

@@ -29,11 +29,12 @@
 \usepackage[strict]{csquotes}
 \usepackage[backend=biber,\Bibstyle]{biblatex}
 	\addbibresource{../bib/Quellen.bib}
-	\nocite{*}
 \usepackage{setspace}
 	\linespread{1.5}
 \usepackage{accsupp}
 	\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+	\DeclareRobustCommand\squelch[1]{%
+		\BeginAccSupp{method=plain,ActualText={}}#1\EndAccSupp{}}
 \usepackage{listings}
 	\renewcommand{\ttdefault}{pcr}
 	\lstset{
@@ -45,6 +46,8 @@
 		keywordstyle=[4]\bfseries\color{jskeypink},
 		keywordstyle=[5]\color{black},
 		frame=single,
+		breaklines=true,
+		postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
 		numbers=left,
 		numberstyle=\scriptsize\color{gray}\emptyaccsupp,
 		stepnumber=1,
@@ -83,11 +86,15 @@
 		morestring=[d][\color{stringblue}]',
 		morestring=[b][\color{stringblue}]",
 	}
+	\lstdefinelanguage[HANA]{SQL}[]{SQL}{
+		morekeywords={BEGIN, DATA, DAYS\_BETWEEN, DECLARE, DEFINER, FLOOR, LANGUAGE, NOW, NVARCHAR, OUT, POWER, PROCEDURE, READS, SECURITY, SQL, SQL, SQLSCRIPT, TOP}
+	}
 	\renewcommand\lstlistlistingname{Listingverzeichnis}
 \usepackage[figure,table,lstlisting]{totalcount}
 \usepackage{hyperref}
 	\hypersetup{
 		hidelinks,
+		bookmarksopen=true,
 		pdftitle=\Titel{},
 		pdfauthor=\Ersteller{}
 	}
@@ -99,10 +106,10 @@
 	\counterwithout{footnote}{chapter} %Durchgehende Nummerierung der Fußnoten
 \usepackage[headsepline,footsepline,plainfootsepline,automark]{scrpage2}
 	\clearscrheadfoot
-	\ihead[]{\headmark}
-	\ifoot[DHBW Mannheim]{DHBW Mannheim}
-	\cfoot[- \pagemark{} -]{- \pagemark{} -}
-	\ofoot[\Ersteller]{\Ersteller}
+	\ihead[]{\squelch{\headmark}}
+	\ifoot[\squelch{DHBW Mannheim}]{\squelch{DHBW Mannheim}}
+	\cfoot[\squelch{- \pagemark{} -}]{\squelch{- \pagemark{} -}}
+	\ofoot[\squelch{\Ersteller}]{\squelch{\Ersteller}}
 	\setkomafont{pagehead}{\normalfont}
 	\setkomafont{pagefoot}{\normalfont}
 	\pagestyle{scrheadings}
@@ -112,6 +119,8 @@
 		\input{\Glossarypath}
 		\makeglossaries
 \fi
+
+\InputIfFileExists{../advanced_settings.tex}{}
 
 
 \begin{document}
@@ -220,8 +229,7 @@
 	\chapter*{Ehrenwörtliche Erklärung}
 		\thispagestyle{empty}
 		Ich erkläre hiermit ehrenwörtlich:
-		\renewcommand{\theenumi}{\arabic{enumi})}
-		\renewcommand\labelenumi{\theenumi}
+		\renewcommand\labelenumi{\arabic{enumi})}
 		\begin{enumerate}
 			\item dass ich meine \Arbeitstyp{} mit dem Thema \\
 				\textbf{\Titel} \\
