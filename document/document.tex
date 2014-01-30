@@ -1,16 +1,39 @@
 \documentclass[fontsize=12pt,listof=totoc]{scrreprt}
 
-\newif\ifsperr
-\newif\ifglossary
-\newif\ifroman
+\newcommand{\Ersteller}{\textcolor{red}{<Ersteller>}}
+\newcommand{\Kurs}{\textcolor{red}{<Kurs>}}
+\newcommand{\Studiengang}{\textcolor{red}{<Studiengang>}}
+\newcommand{\Profilfach}{\textcolor{red}{<Profilfach>}}
+\newcommand{\Titel}{\textcolor{red}{<Der Titel dieser Arbeit>}}
+\newcommand{\Arbeitstyp}{\textcolor{red}{<Arbeitstyp>}}
+\newcommand{\Matrikelnummer}{\textcolor{red}{<1234567>}}
+\newcommand{\Firma}{\textcolor{red}{<Firma>}}
+\newcommand{\FirmenAdresse}{\textcolor{red}{<Stra{\ss}e> \\ <PLZ Ort>}}
+\newcommand{\Abteilung}{\textcolor{red}{<Abteilung>}}
+\newcommand{\Studiengangsleiter}{\textcolor{red}{<Studiengangsleiter>}}
+\newcommand{\DHBetreuer}{\textcolor{red}{<Betreuer>}}
+\newcommand{\DHBetreuerEmail}{\textcolor{red}{Betreuer@example.com}}
+\newcommand{\Betreuer}{\textcolor{red}{<Firmenbetreuer>}}
+\newcommand{\BetreuerEmail}{\textcolor{red}{Firmenbetreuer@example.com}}
+\newcommand{\Zeitraum}{\textcolor{red}{<Anfang> bis <Ende>}}
+
 \newcommand{\Abstractpath}{../text/abstract.tex}
 \newcommand{\Textpath}{../text/text.tex}
 \newcommand{\Imgpath}{../img/}
 \newcommand{\Codepath}{../code/}
 \newcommand{\Glossarypath}{../text/glossary.tex}
 \newcommand{\Bibpath}{../bib/Quellen.bib}
+
+\newif\ifsperr
+\sperrfalse
+\newif\ifglossary
+\glossaryfalse
+\newif\ifroman
+\romanfalse
+
 \newcommand{\Bibstyle}{style=authortitle}
-\input{../settings.tex}
+
+\InputIfFileExists{../settings.tex}{}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -29,7 +52,9 @@
 \usepackage[hyphens]{url}
 \usepackage[strict]{csquotes}
 \usepackage[backend=biber,\Bibstyle]{biblatex}
-	\addbibresource{\Bibpath}
+	\IfFileExists{\Bibpath}{
+		\addbibresource{\Bibpath}
+	}{}
 \usepackage{setspace}
 	\linespread{1.5}
 \usepackage{accsupp}
@@ -68,28 +93,6 @@
 			{8}{{{\color{numberblue}8}}}1
 			{9}{{{\color{numberblue}9}}}1
 	}
-	\lstdefinelanguage{htmlfive}{
-		alsoletter={-},
-		%keywords={a,abbr,address,area,article,aside,audio,b,base,bdi,bdo,blockquote,body,br,button,canvas,caption,cite,code,col,colgroup,command,datalist,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,head,header,hgroup,hr,html,i,iframe,img,input,ins,kbd,keygen,label,legend,li,link,map,mark,menu,meta,meter,nav,noscript,object,ol,optgroup,option,output,p,param,pre,progress,q,rp,rt,ruby,s,samp,script,section,select,small,source,span,strong,style,sub,summary,sup,tabel,tbody,td,textarea,tfoot,th,thead,time,title,tr,track,u,ul,var,video,wbr},%html
-		morekeywords={[2]accept,accept-charset,accesskey,action,align,alt,async,autocomplete,autofocus,autoplay,buffered,challenge,charset,checked,cite,class,code,codebase,cols,colspan,content,contenteditable,contextmenu,controls,coords,data,datetime,default,defer,dir,dirname,disabled,download,draggable,dropzone,enctype,for,form,headers,height,hidden,high,href,hreflang,http-equiv,icon,id,ismap,itemprop,keytype,kind,label,lang,language,list,loop,low,manifest,max,maxlength,media,method,min,multiple,name,novalidate,open,optimum,pattern,ping,placeholder,poster,preload,pubdate,radiogroup,readonly,rel,required,reversed,rows,rowspan,sandbox,spellcheck,scope,scoped,seamless,selected,shape,size,sizes,span,src,srcdoc,srclang,start,step,style,summary,tabindex,target,title,type,usemap,value,width,wrap},%html-attributes
-		morekeywords={[3]align-content,align-items,align-self,animation,animation-delay,animation-direction,animation-duration,animation-fill-mode,animation-iteration-count,animation-name,animation-play-state,animation-timing-funtion,backface-visibility,background,background-attachment,background-clip,background-color,background-image,background-origin,background-position,background-repeat,background-size,boder,border-bottom,border-bottom-color,border-bottom-left-radius,border-bottom-right-radius,border-bottom-style,border-bottom-width,border-collapse,border-color,border-image,border-image-outset,border-image-repeat,border-image-slice,border-image-source,border,image-width,border-left,border-left-color,border-left-style,border-left-width,border-radius,border-right,border-right-color,border-right-style,border-right-width,border-spacing,border-style,border-top,border-top-color,border-top-left-radius,border-top,right-radius,border-top-style,border-top-width,border-width,bottom,box-decoration-break,box-shadow,box-sizing,break-after,break-before,break-inside,caption-side,clear,clip,clip-path,color,columns,column-count,column-fill,column-gap,column-rule,column-rule-color,column-rule-style,column-rule-width,column-span,column-width,content,cursor,direction,display,empty-cells,filter,flex,flex-basis,flex-direction,flex-flow,flex-grow,flex-shrink,flex-wrap,float,font,font-family,font-feature-settings,font-kerning,font-language-override,font-size,font-size-adjust,font-stretch,font-style,font-variant,font-variant-ligatures,font-weight,height,hyphens,icon,image,image-rendering,image-resolution,image-orientation,ime-mode,justify-content,left,letter-spacing,line-height,list-style,list-style-image,list-style-position,list-style-type,margin,margin-bottom,margin-left,margin-right,margin-top,marks,mask,max-height,max-width,min-height,min-width,opacity,order,orphans,outline,outline-color,outline-offset,outline-style,outline-width,overflow,overflow-wrap,overflow-x,overflow-y,padding,padding-bottom,padding-left,padding-right,padding-top,page-break-after,page-break-before,page-break-inside,perspective,perspective-origin,pointer-events,position,quotes,resize,right,table-layout,tab-size,text-align,text-align-last,text-combine-horizontal,text-decoration,text-decoration-color,text-decoration-line,text-decoration-style,text-indent,text-orientation,text-overflow,text-rendering,text-shadow,text-transform,text-underline-position,top,transform,transform-origin,transform-style,transition,transition-delay,transition-duration,transition-property,transition-timing-function,unicode-bidi,vertial-align,visibility,white-space,widows,width,word-break,word-spacing,word-wrap,writing-mode,z-index},%css-properties
-		morekeywords={[4]break,case,catch,class,continue,debugger,default,delete,do,else,enum,export,extends,false,finally,for,function,if,implements,import,in,instaceof,interface,let,new,package,private,protected,public,return,static,super,switch,this,throw,true,try,typeof,var,void,while,with,yield},%js
-		sensitive=false,
-		%morecomment=[l][\color{commentblue}]{//},
-		%morecomment=[s][\color{commentblue}]{/*}{*/},
-		%morecomment=[s][\color{commentblue}]{<!--}{-->},
-		morestring=[b][\color{stringblue}]",
-		moredelim=*[s][\color{taggreen}]{<}{>},
-	}
-	\lstdefinelanguage{js}{
-		morekeywords={[4]break,case,catch,class,continue,debugger,default,delete,do,else,enum,export,extends,false,finally,for,function,if,implements,import,in,instaceof,interface,let,new,package,private,protected,public,return,static,super,switch,this,throw,true,try,typeof,var,void,while,with,yield},
-		sensitive=false,
-		morestring=[d][\color{stringblue}]',
-		morestring=[b][\color{stringblue}]",
-	}
-	\lstdefinelanguage[HANA]{SQL}[]{SQL}{
-		morekeywords={BEGIN, DATA, DAYS\_BETWEEN, DECLARE, DEFINER, FLOOR, LANGUAGE, NOW, NVARCHAR, OUT, POWER, PROCEDURE, READS, SECURITY, SQL, SQL, SQLSCRIPT, TOP}
-	}
 	\renewcommand\lstlistlistingname{Listingverzeichnis}
 \usepackage[figure,table,lstlisting]{totalcount}
 \usepackage{hyperref}
@@ -102,6 +105,8 @@
 	\def\sectionautorefname{Abschnitt}
 	\def\chapterautorefname{Kapitel}
 	\providecommand*{\lstnumberautorefname}{Listing}
+	\pdfstringdef\plainDHBetreuerEmail{\DHBetreuerEmail}
+\pdfstringdef\plainBetreuerEmail{\BetreuerEmail}
 \usepackage{bookmark}
 \usepackage{chngcntr}
 	\counterwithout{footnote}{chapter} %Durchgehende Nummerierung der Fußnoten
@@ -117,7 +122,7 @@
 \usepackage{scrhack}
 \ifglossary
 	\usepackage[toc,nonumberlist,translate=babel,acronym]{glossaries}
-		\input{\Glossarypath}
+		\InputIfFileExists{\Glossarypath}{}
 		\makeglossaries
 \fi
 
@@ -144,15 +149,23 @@
 			\end{onehalfspace}
 			\vspace{30px}
 			\normalsize
-			\textbf{Studiengang Wirtschaftsinformatik}\\
-			\textbf{\small{Profil Softwareengineering}}\\
+			\textbf{Studiengang \Studiengang}\\
+			\textbf{\small{Profil \Profilfach}}\\
 			\ifsperr
 				\textcolor{red}{\textbf{-Sperrvermerk-}}\\
 			\fi
 			\vfill
 		\end{center}
 		\begin{tabular}{ll}
-			\Titelblatt{}
+			\textbf{Verfasser:} & \Ersteller\\
+			\textbf{Matrikelnummer:} & \Matrikelnummer\\
+			\textbf{Firma:} & \Firma\\
+			\textbf{Abteilung:} & \Abteilung\\
+			\textbf{Kurs:} & \Kurs\\
+			\textbf{Studiengangsleiter:} & \Studiengangsleiter \\
+			\textbf{Wissenschaftlicher Betreuer:} & \DHBetreuer{} \flq{}\href{mailto:\plainDHBetreuerEmail}{\DHBetreuerEmail}\frq{}\\
+			\textbf{Firmenbetreuer:} & \Betreuer{} \flq{}\href{mailto:\plainBetreuerEmail}{\BetreuerEmail}\frq{}\\
+			\textbf{Bearbeitungszeitraum:} & \Zeitraum\\
 		\end{tabular}
 	\end{titlepage}
 	
@@ -163,12 +176,11 @@
 		\thispagestyle{scrplain}
 		\chapter*{Sperrvermerk}
 			Die nachfolgende Arbeit enthält vertrauliche Daten, welche geistiges Eigentum der\\[\baselineskip]
-			SAP AG \\
-			Dietmar-Hopp-Allee 16 \\
-			69190 Walldorf \\
+			\Firma \\
+			\FirmenAdresse \\
 			\linebreak
 			darstellen.\\[\baselineskip]
-			Sie darf als Leistungsnachweis des Studiengangs „Wirtschaftsinformatik“ an der Dualen Hochschule Baden-Württemberg in Mannheim nur zu Prüfungszwecken zu\-gäng\-lich gemacht werden. Über den Inhalt ist Stillschweigen zu bewahren. Ver\-öf\-fent\-li\-chung oder Vervielfältigung der \Arbeitstyp{} – auch auszugsweise – ist ohne aus\-drück\-liche Genehmigung der SAP~AG nicht gestattet. Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in dieser Arbeit berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher benutzt werden dürfen.\\
+			Sie darf als Leistungsnachweis des Studiengangs \enquote{\Studiengang} an der Dualen Hochschule Baden-Württemberg in Mannheim nur zu Prüfungszwecken zugänglich gemacht werden. Über den Inhalt ist Stillschweigen zu bewahren. Veröffentlichung oder Vervielfältigung der \Arbeitstyp{} – auch auszugsweise – ist ohne ausdrückliche Genehmigung der \Firma{} nicht gestattet. Die Wiedergabe von Gebrauchsnamen, Handelsnamen, Warenbezeichnungen usw. in dieser Arbeit berechtigt auch ohne besondere Kennzeichnung nicht zu der Annahme, dass solche Namen im Sinne der Warenzeichen- und Markenschutz-Gesetzgebung als frei zu betrachten wären und daher benutzt werden dürfen.\\
 			\vfill
 			\noindent
 			\rule[-7px]{120px}{.4pt}\hfill\rule[-7px]{120px}{.4pt}\\
@@ -186,7 +198,7 @@
 			Thema: & \Titel \\
 		\end{tabular}
 		\\[\baselineskip]
-		\input{\Abstractpath}
+		\InputIfFileExists{\Abstractpath}{}
 
 	\newpage
 		\hypertarget{toc}{}
@@ -211,7 +223,7 @@
 		\setcounter{lastroman}{\value{page}}
 		\pagenumbering{arabic}
 	\fi
-	\input{\Textpath}
+	\InputIfFileExists{\Textpath}{}
 	
 	\ifroman
 		\newpage

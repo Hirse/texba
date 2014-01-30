@@ -1,30 +1,29 @@
 % Einstellung von Variablen für das gesamte Dokument
-\newcommand{\Ersteller}{__INPUT__}
-\newcommand{\Kurs}{__INPUT__}
-\newcommand{\Titel}{__INPUT__}
-\newcommand{\Arbeitstyp}{__INPUT__} % z.B. Bachelorarbeit
-
-% Formulierung der Tabelle auf dem Titelblatt
-\newcommand{\Titelblatt}{
-	\textbf{Verfasser:} & \Ersteller\\
-	\textbf{Matrikelnummer:} & __INPUT__\\
-	\textbf{Firma:} & __INPUT__\\
-	\textbf{Abteilung:} & __INPUT__\\
-	\textbf{Kurs:} & \Kurs\\
-	\textbf{Studiengangsleiter:} & __INPUT__\\
-	\textbf{Wissenschaftlicher Betreuer:} & __INPUT__ \flq{}\href{mailto:__INPUT[E-Mail]__}{__INPUT[E-Mail]__}\frq{}\\
-	\textbf{Firmenbetreuer:} & __INPUT__ \flq{}\href{mailto:__INPUT[E-Mail]__}{__INPUT[E-Mail]__}\frq{}\\
-	\textbf{Bearbeitungszeitraum:} & __INPUT[Datum]__ bis __INPUT[Datum]__\\
-}
+\renewcommand{\Ersteller}{<Ersteller>}
+\renewcommand{\Kurs}{<Kurs>}
+\renewcommand{\Studiengang}{<Studiengang>}
+\renewcommand{\Profilfach}{<Profilfach>}
+\renewcommand{\Titel}{<Der Titel dieser Arbeit>}
+\renewcommand{\Arbeitstyp}{<Arbeitstyp>}
+\renewcommand{\Matrikelnummer}{1234567}
+\renewcommand{\Firma}{<Firma>}
+\renewcommand{\FirmenAdresse}{<Straße> \\ <PLZ Ort>}
+\renewcommand{\Abteilung}{<Abteilung>}
+\renewcommand{\Studiengangsleiter}{<Studiengangsleiter>}
+\renewcommand{\DHBetreuer}{<Betreuer>}
+\renewcommand{\DHBetreuerEmail}{<Betreuer@example.com>}
+\renewcommand{\Betreuer}{<Firmenbetreuer>}
+\renewcommand{\BetreuerEmail}{<Firmenbetreuer@example.com>}
+\renewcommand{\Zeitraum}{<Anfang> bis <Ende>}
 
 % Einfügen eines Sperrvermerkes:
-\sperrfalse % oder \sperrtrue
+ % \sperrtrue
 
 % Römische Seitenzahlen von und nach Text
-\romanfalse % oder \romantrue
+% \romantrue
 
 % Einfügen eines Glossars
-\glossaryfalse % oder \glossarytrue
+% \glossarytrue
 
 % Anpassung der Pfade
 %\renewcommand{\Abstractpath}{../text/abstract.tex}
@@ -35,5 +34,6 @@
 %\renewcommand{\Bibpath}{../bib/Quellen.bib}
 
 % Zitierstil ändern
-%\renewcommand{\Bibstyle}{style=alphabetic} % oder
+%\renewcommand{\Bibstyle}{style=alphabetic} 
+% oder
 %\renewcommand{\Bibstyle}{bibstyle=verbose,citestyle=verbose-trad2}
