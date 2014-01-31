@@ -122,7 +122,9 @@
 \usepackage{scrhack}
 \ifglossary
 	\usepackage[toc,nonumberlist,translate=babel,acronym]{glossaries}
-		\InputIfFileExists{\Glossarypath}{}
+		\IfFileExists{\Glossarypath}{
+			\input{\Glossarypath}
+		}{}
 		\makeglossaries
 \fi
 
