@@ -106,7 +106,7 @@
 	\def\chapterautorefname{Kapitel}
 	\providecommand*{\lstnumberautorefname}{Listing}
 	\pdfstringdef\plainDHBetreuerEmail{\DHBetreuerEmail}
-\pdfstringdef\plainBetreuerEmail{\BetreuerEmail}
+	\pdfstringdef\plainBetreuerEmail{\BetreuerEmail}
 \usepackage{bookmark}
 \usepackage{chngcntr}
 	\counterwithout{footnote}{chapter} %Durchgehende Nummerierung der Fußnoten
@@ -118,10 +118,11 @@
 	\ofoot[\squelch{\Ersteller}]{\squelch{\Ersteller}}
 	\setkomafont{pagehead}{\normalfont}
 	\setkomafont{pagefoot}{\normalfont}
+	\addtokomafont{pagenumber}{\sffamily}
 	\pagestyle{scrheadings}
 \usepackage{scrhack}
 \ifglossary
-	\usepackage[toc,nonumberlist,translate=babel,acronym]{glossaries}
+	\usepackage[toc,nonumberlist,nopostdot,translate=babel,acronym]{glossaries}
 		\IfFileExists{\Glossarypath}{
 			\input{\Glossarypath}
 		}{}
@@ -194,7 +195,7 @@
 	\bookmark[level=chapter, dest=abstract]{Kurzfassung}
 	\thispagestyle{scrplain}
 	\chapter*{Kurzfassung}
-		\begin{tabular}{lp{0.8\columnwidth}}
+		\begin{tabular}{lp{0.84\columnwidth}}
 			Verfasser: & \Ersteller \\
 			Kurs: & \Kurs \\
 			Thema: & \Titel \\

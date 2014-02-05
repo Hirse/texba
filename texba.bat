@@ -46,4 +46,5 @@ IF NOT "%1"=="--keep" (
 )
 CD ..
 ECHO Finished. Log written to texba.log.
-PAUSE > NUL
+start "" "%pdfname%"
+::PAUSE > NUL
